@@ -1,12 +1,29 @@
 <html>
     <head>
         <title>Todo List</title>
+        <style>
+            *{
+                text-align: left;
+            }
+            #All{
+                display: flex;
+                flex-direction: row;
+            }
+            #pend , #comp{
+                
+                text-align: center;
+                margin: 10px 80px;
+                background-color: rgb(273, 167, 80);
+                color:black
+                
+            }
+        </style>
     </head>
     <body>
-        <div>
-            <input type='text' name='todo_input'>
-            <button type='submit'>Add Todo</button>
-            <div class='todos'></div>
+        <div id='All'>
+            
+            <div id="pend">Pending Items</div>
+            <div id="comp">Completed Items</div>
         </div>
     </body>
     <script src='./script.js'></script>
