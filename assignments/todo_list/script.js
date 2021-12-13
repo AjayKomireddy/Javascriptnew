@@ -1,49 +1,25 @@
-
-// let inputValue=document.getElementsByTagName('input')[0];
-// let Addtobutton=document.getElementsByTagName('button')[0];
-// let divtodos=document.getElementsByClassName('todos')[0];
-// var x=0;
-// Addtobutton.onclick=displayInput;
-
-// function displayInput(){
-//     if(inputValue.value == "" || inputValue.value==0){
-//         alert("invalid input")
-//     }
-//     else {
-//         var insidetag=document.createElement('p');//<p key=0  >"Ajay"</p>
-//         var attri=document.createAttribute('key');
-//         var insidediv1=document.createElement('div');
-//         attri.value=x;                        //key=0
-//         insidetag.setAttributeNode(attri);
-//         insidetag.innerHTML=inputValue.value;
-//         divtodos.appendChild(insidetag);
-//         inputValue.value="";
-//         x++;
-//         insidetag.onclick=function () { 
-//             divtodos.removeChild(insidetag);
-//         }
-//     }
-// }
-
-// Todo Assignment from API file.
-
-// let btnpending=document.querySelector('.Pending')
-// let btncompleted=document.querySelector('.Completed')
-var todos=document.querySelector('div.todos')
-async function main(){
-    try{
-        const response = await fetch('https://jsonplaceholder.typicode.com/todos');
-        const json = await response.json();
-        const todos = json.slice(0,10);
-        console.log(todos);
-    }catch(e){
-        console.log(e);
+var pendingtodo=document.getElementById("pend");
+var completedtodo=document.getElementById("comp");
+// -----------------------------------------------------------------
+// getting data in to my js file by using async and await 
+const url = "https://jsonplaceholder.typicode.com/todos";
+async function getapi(url) {
+    const response = await fetch(url);
+    var data = await response.json();
+// -----------------------------------------------------------------
+// The data we got is an array ,on iterating we check weather the completed is True or False
+    for (var i=0;i<data.length;i++){
+        var apiData=data[i]
+        if(apiData.completed==false){
+            var pendingItem=document.createElement("ol");
+            pendingItem.innerHTML=apiData.title;
+            console.log(pendingItem.innerHTML);
+            pendingtodo.appendChild(pendingItem);
+        }else{
+            var completedItem=document.createElement("ol");
+            completedItem.innerHTML=apiData.title;
+            completedtodo.appendChild(completedItem);
+        }
     }
-
 }
-main()
-var insideTag=document.createElement('p');
-insideTag.innerHTML=todos;
-todos.appendChild(insideTag);
-
-
+getapi(url);
